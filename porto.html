@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portofolio Auldy Ansya Rullah, Software Engineer untuk mobile dan backend.">
+<title>Portofolio Auldy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* Layout: hero besar dengan nama, lalu satu proyek unggulan lebar penuh, lalu grid kartu bersampul ilustrasi per proyek; studi kasus dibuka lewat #hash */
+:root{
+  /* satu tema terang yang dipilih sengaja: putih bersih, abu kebiruan lembut, satu aksen biru tenang */
+  --bg:#ffffff; --soft:#f5f7fa; --surface:#ffffff; --fg:#1d2433; --muted:#667085; --line:#e6e9ef;
+  --accent:#2f5fd0; --accent-soft:#edf2fd; --ink:#1d2433; --ink-fg:#ffffff;
+  --terra:#b4532a; --terra-soft:#f8eee8; --ok:#1f7a4d; --ok-soft:#e8f5ee; --warn:#93650a; --warn-soft:#fbf3e1;
+  --f-display:"Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--f-body);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.wrap{max-width:1040px;margin:0 auto}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.2;font-weight:700}
+h2{font-size:clamp(1.5rem,3.4vw,1.9rem);letter-spacing:-.02em}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0;max-width:65ch}
+.stack{display:flex;flex-direction:column;gap:16px}
+.label{font-size:.8rem;font-weight:600;color:var(--muted)}
+.lede{font-size:1.1rem;color:var(--muted)}
+
+/* ---------- HOME ---------- */
+.home{display:flex;flex-direction:column;gap:88px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:.9rem}
+.nav .mark{font-family:var(--f-display);font-weight:700;font-size:1.15rem;color:var(--fg);text-decoration:none;letter-spacing:-.02em}
+.nav .links{display:flex;gap:18px;flex-wrap:wrap}
+.nav .links a{color:var(--muted);text-decoration:none}
+.nav .links a:hover{color:var(--fg)}
+
+.hero{display:flex;flex-direction:column;gap:28px;padding-top:40px;max-width:760px}
+.me{display:flex;align-items:center;gap:14px}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:1.05rem;flex:none}
+.me b{display:block;font-weight:600}
+.me span{color:var(--muted);font-size:.92rem}
+.hero h1{font-size:clamp(2.1rem,5.5vw,3.4rem);letter-spacing:-.03em;line-height:1.12}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.bio{font-size:1.12rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--line);color:var(--fg);background:var(--surface)}
+.btn:hover{border-color:#c9cfd9}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#2752b8}
+.facts{list-style:none;margin:8px 0 0;padding:24px 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:16px 48px}
+.facts li{display:flex;flex-direction:column}
+.facts b{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
+.facts span{font-size:.88rem;color:var(--muted)}
+
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters button{font:500 .85rem var(--f-body);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.filters button:hover{border-color:var(--muted)}
+.filters button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;color:inherit;text-decoration:none;transition:border-color .15s}
+a.card:hover{border-color:#c9cfd9}
+.card .body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .kicker{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.card p{color:var(--muted);font-size:.96rem}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{font-size:.76rem;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--soft);color:#475467}
+.status{font-size:.76rem;font-weight:500;display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.status.live{color:var(--accent)} .status.wip{color:var(--warn)} .status.plan{color:var(--muted)}
+.card .cta{font-weight:600;font-size:.92rem;color:var(--fg)}
+a.card:hover .cta{text-decoration:underline;text-underline-offset:3px}
+
+/* sampul ilustrasi */
+.cover{--h:#888;position:relative;height:200px;background:var(--soft);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.card{--h:var(--accent)}
+.phone{position:relative;z-index:1;width:150px;height:170px;margin-bottom:-24px;background:var(--surface);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;padding:16px 12px;display:flex;flex-direction:column;gap:7px;}
+.phone::before{content:"";position:absolute;top:7px;left:50%;width:28px;height:4px;border-radius:4px;background:var(--line);transform:translateX(-50%)}
+.phone .t{font-family:var(--f-display);font-weight:600;font-size:.8rem;line-height:1.2;color:var(--fg)}
+.phone .chip{align-self:flex-start;font-size:.62rem;font-weight:600;padding:2px 7px;border-radius:999px;background:var(--h);color:#fff}
+.phone .bar{height:7px;border-radius:4px;background:var(--soft)}
+.phone .bar.s{width:60%} .phone .bar.m{width:80%}
+.phone .row{display:flex;gap:6px}
+.phone .sq{width:34px;height:34px;border-radius:8px;background:#e9edf3;flex:none}
+.phone .big{font-family:var(--f-display);font-weight:800;font-size:1.25rem;color:var(--h);line-height:1}
+.term{position:relative;z-index:1;width:min(78%,300px);margin-bottom:-14px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;padding:14px 16px 26px;font:12px/1.7 var(--f-mono);}
+.term .dots{display:flex;gap:5px;margin-bottom:8px}.term .dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.term .ok{color:var(--ok)}.term .m{color:var(--h)}.term .d{color:var(--muted)}
+.flow{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:56px;flex-wrap:wrap;justify-content:center;padding:0 12px}
+.flow span{font:500 .78rem var(--f-mono);padding:8px 12px;border-radius:6px;background:var(--surface);border:1px solid var(--line);color:var(--fg)}
+.flow i{width:22px;height:1px;background:var(--muted);font-style:normal}
+.tree{position:relative;z-index:1;width:min(78%,280px);margin-bottom:-14px;background:var(--surface);border:1px solid var(--line);border-radius:12px 12px 0 0;padding:14px 16px 24px;font:12px/1.8 var(--f-mono);color:var(--muted)}
+.tree b{color:var(--h);font-weight:500}
+
+/* featured */
+.feature{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.feature .cover{height:auto;min-height:300px;border-bottom:0;border-right:1px solid var(--line);gap:14px}
+.feature .phone{width:170px;height:240px;margin-bottom:-30px}
+.feature .phone.back{transform:translateY(30px)}
+.feature .body{padding:32px;gap:14px;justify-content:center}
+.feature h3{font-size:clamp(1.5rem,3vw,2rem)}
+.stacks5{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:700px){.feature{grid-template-columns:1fr}.feature .cover{min-height:240px;border-right:0;border-bottom:1px solid var(--line)}.feature .phone.back{display:none}.feature .body{padding:22px}}
+
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;border-top:1px solid var(--line);padding-top:40px}
+.about p{color:var(--muted)}
+.about ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.about li{display:flex;gap:10px;align-items:baseline;color:var(--fg)}
+.about li::before{content:"–";color:var(--muted);flex:none}
+.about a{font-weight:600}
+@media (max-width:700px){.about{grid-template-columns:1fr}}
+
+/* ---------- STUDI KASUS (Resep) ---------- */
+.proj{--accent:var(--terra);--accent-soft:var(--terra-soft);max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+.proj h1{font-size:clamp(2rem,6vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:.9rem}
+.back{text-decoration:none;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0;list-style:none}
+.chip{font-family:var(--f-mono);font-size:.74rem;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--surface)}
+.timeline{list-style:none;padding:0;display:flex;flex-direction:column;border-left:2px solid var(--line);margin:0 0 0 6px}
+.timeline li{position:relative;padding:0 0 22px 22px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--terra)}
+.timeline .yr{font-family:var(--f-mono);font-size:.75rem;color:var(--terra);font-variant-numeric:tabular-nums}
+.timeline h3{margin:2px 0 4px;font-size:1.05rem}
+.timeline p{color:var(--muted);font-size:.95rem}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ba > div{display:flex;flex-direction:column;gap:10px;min-width:0}
+@media (max-width:600px){.ba{grid-template-columns:1fr}}
+pre{margin:0;overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:13px/1.55 var(--f-mono)}
+.tag-bad{color:var(--warn)} .tag-good{color:var(--ok)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:500 .85rem var(--f-mono);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--terra);border-color:var(--terra);color:var(--bg)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.panel dl{display:grid;grid-template-columns:96px 1fr;gap:10px 16px;margin:0}
+.panel dt{font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:3px}
+.panel dd{margin:0;min-width:0}
+@media (max-width:480px){.panel dl{grid-template-columns:1fr;gap:2px}.panel dd{margin-bottom:10px}}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+.st{font-family:var(--f-mono);font-size:.72rem;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.st.ok{background:var(--ok-soft);color:var(--ok)} .st.no{background:var(--warn-soft);color:var(--warn)}
+footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:no-preference){[data-view]{animation:fade .3s ease-out}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<main data-view="home" class="home">
+  <nav class="nav"><a class="mark" href="#">Auldy</a><div class="links"><a href="#" data-jump="karya">Karya</a><a href="#" data-jump="tentang">Tentang</a><a href="https://github.com/aulansah">GitHub ↗</a></div></nav>
+
+  <header class="hero">
+    <div class="me"><div class="avatar" aria-hidden="true">AR</div><div><b>Auldy Ansya Rullah</b><span>Software Engineer · Mobile &amp; Backend</span></div></div>
+    <h1>Membangun aplikasi mobile yang rapi, <em>sampai ke backend-nya.</em></h1>
+    <p class="bio">Mulai sebagai developer Android native tahun 2021, lalu mengerjakan aplikasi mobile produksi dengan Flutter dan Kotlin. Sekarang saya fokus membangun aplikasi mobile dan backend, dari layar sampai API dan database.</p>
+    <div class="actions"><a class="btn primary" href="#" data-jump="karya">Lihat karya</a><a class="btn" href="https://github.com/aulansah">GitHub ↗</a></div>
+    <ul class="facts">
+      <li><b>12</b><span>proyek</span></li>
+      <li><b>2021</b><span>mulai Android</span></li>
+      <li><b>5</b><span>stack mobile</span></li>
+      <li><b>3</b><span>bahasa backend</span></li>
+    </ul>
+  </header>
+
+  <section id="karya">
+    <div class="sec-head">
+      <h2>Karya</h2>
+      <div class="filters" role="group" aria-label="Saring kategori">
+        <button type="button" data-f="all" aria-pressed="true">Semua</button>
+        <button type="button" data-f="mobile" aria-pressed="false">Mobile</button>
+        <button type="button" data-f="backend" aria-pressed="false">Backend</button>
+        <button type="button" data-f="belajar" aria-pressed="false">Belajar</button>
+      </div>
+    </div>
+    <div class="grid">
+      <a class="card feature" data-cat="mobile" href="#resep-makanan-indonesia" style="--h:var(--terra)">
+        <div class="cover" style="--h:#b4532a">
+          <div class="phone back"><span class="t">Masakan Nusantara</span><div class="row"><div class="sq"></div><div class="sq"></div><div class="sq"></div></div><div class="bar m"></div><div class="bar s"></div></div>
+          <div class="phone"><span class="t">Rendang</span><span class="chip">Padang</span><div class="sq" style="width:100%;height:60px"></div><span class="t" style="font-size:.7rem">Porsi</span><span class="big">− 4 +</span><div class="bar m"></div></div>
+        </div>
+        <div class="body">
+          <div class="kicker"><span class="label">Proyek unggulan · Mobile</span><span class="status live">Kode di GitHub</span></div>
+          <h3>Resep Makanan Indonesia</h3>
+          <p>Tugas belajar Android tahun 2021 yang saya hidupkan lagi jadi aplikasi memasak 10 makanan khas Indonesia, lengkap dengan kalkulator porsi. Lalu saya bangun ulang dalam lima stack untuk membandingkan cara kerja tiap teknologi.</p>
+          <div class="stacks5"><span class="tag">Compose</span><span class="tag">Kotlin XML</span><span class="tag">Java</span><span class="tag">Flutter</span><span class="tag">React Native</span></div>
+          <span class="cta">Baca studi kasus →</span>
+        </div>
+      </a>
+      <article class="card" data-cat="mobile" style="--h:#c0392b">
+        <div class="cover" style="--h:#c0392b"><div class="phone"><span class="t">Bubuhkan meterai</span><span class="big">Rp10.000</span><div class="bar m"></div><div class="bar s"></div><span class="chip">Bayar</span></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Mobile</span><span class="status ">Belum dipublikasikan</span></div>
+          <h3>e-Meterai</h3>
+          <p>Simulasi platform e-Meterai dari ujung ke ujung: mulai dari product discovery sampai aplikasi 14 layar yang tersambung ke backend sendiri.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Go</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="mobile" style="--h:#c8102e">
+        <div class="cover" style="--h:#c8102e"><div class="phone"><span class="t">Agenda hari ini</span><div class="row"><div class="sq"></div><div class="stack" style="gap:5px;flex:1"><div class="bar"></div><div class="bar s"></div></div></div><div class="row"><div class="sq"></div><div class="stack" style="gap:5px;flex:1"><div class="bar"></div><div class="bar s"></div></div></div></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Mobile</span><span class="status ">Belum dipublikasikan</span></div>
+          <h3>RAPIM TelkomGroup</h3>
+          <p>Aplikasi pendamping acara rapat pimpinan TelkomGroup, lengkap dengan backend dan prototipe HTML interaktif untuk presentasi.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Go</span><span class="tag">HTML</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="mobile" style="--h:#3b5bdb">
+        <div class="cover" style="--h:#3b5bdb"><div class="phone"><div class="bar" style="height:22px;border-radius:8px"></div><div class="row"><div class="sq" style="border-radius:50%"></div><div class="stack" style="gap:5px;flex:1"><div class="bar m"></div><div class="bar s"></div></div></div><div class="row"><div class="sq" style="border-radius:50%"></div><div class="stack" style="gap:5px;flex:1"><div class="bar m"></div><div class="bar s"></div></div></div></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Mobile</span><span class="status ">Belum dipublikasikan</span></div>
+          <h3>GitHub User Search</h3>
+          <p>Satu aplikasi dalam tiga tahap: View/XML lama, Jetpack Compose, lalu Clean Architecture dengan Hilt, Room, dan WorkManager.</p>
+          <div class="tags"><span class="tag">Kotlin</span><span class="tag">Compose</span><span class="tag">Hilt</span><span class="tag">Room</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="mobile" style="--h:#d98e04">
+        <div class="cover" style="--h:#d98e04"><div class="phone"><span class="chip">NOW SHOWING</span><div class="row"><div class="sq" style="height:56px;width:40px"></div><div class="sq" style="height:56px;width:40px"></div><div class="sq" style="height:56px;width:40px"></div></div><div class="bar m"></div></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Mobile</span><span class="status ">Belum dipublikasikan</span></div>
+          <h3>Made-MoviesApp</h3>
+          <p>Katalog film TMDB lama yang dianalisis lalu dimodernisasi, termasuk desain ulang bergaya papan bioskop dalam mockup HTML dan proyek Flutter.</p>
+          <div class="tags"><span class="tag">Kotlin</span><span class="tag">Flutter</span><span class="tag">TMDB API</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="backend" style="--h:#0b8a6e">
+        <div class="cover" style="--h:#0b8a6e"><div class="phone"><span class="t">Jadwal dokter</span><div class="row"><div class="sq"></div><div class="stack" style="gap:5px;flex:1"><div class="bar"></div><div class="bar s"></div></div></div><span class="chip">Daftar</span></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Backend</span><span class="status wip">Sedang dibangun</span></div>
+          <h3>Medikita</h3>
+          <p>Sistem rumah sakit dalam satu monorepo: aplikasi mobile di empat stack dengan tiga backend, plus CI/CD untuk lingkungan DEV dan QA.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">React Native</span><span class="tag">Spring Boot</span><span class="tag">Go</span><span class="tag">Node.js</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="backend" style="--h:#00add8">
+        <div class="cover" style="--h:#00add8"><div class="term"><div class="dots"><i></i><i></i><i></i></div><span class="m">POST</span> /api/orders <span class="ok">201</span><br><span class="m">GET</span>&nbsp; /api/products <span class="ok">200</span><br><span class="d">idempotency-key: ok</span></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Backend</span><span class="status wip">Sedang dibangun</span></div>
+          <h3>Go E-Commerce API</h3>
+          <p>Backend e-commerce dari nol sampai mendekati produksi lewat 21 fase: produk, auth, keranjang, order, payment, Redis, message queue, Docker, CI/CD.</p>
+          <div class="tags"><span class="tag">Go</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Docker</span></div>
+        </div>
+      </article>
+      <a class="card" data-cat="backend" style="--h:#7048e8" href="https://github.com/aulansah/KasPintar">
+        <div class="cover" style="--h:#7048e8"><div class="phone"><span class="t">Saldo kas</span><span class="big">+ − </span><div class="bar m"></div><div class="bar s"></div><div class="bar m"></div></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Backend</span><span class="status live">Kode di GitHub</span></div>
+          <h3>KasPintar</h3>
+          <p>Aplikasi web untuk mencatat kas.</p>
+          <div class="tags"><span class="tag">JavaScript</span></div><span class="cta">Lihat kode ↗</span>
+        </div>
+      </a>
+      <a class="card" data-cat="backend" style="--h:#d6336c" href="https://github.com/aulansah/list-undangan-wedding">
+        <div class="cover" style="--h:#d6336c"><div class="phone"><span class="t">Daftar tamu</span><div class="bar m"></div><div class="bar"></div><div class="bar s"></div><div class="bar m"></div></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Backend</span><span class="status live">Kode di GitHub</span></div>
+          <h3>Daftar Undangan</h3>
+          <p>Aplikasi web untuk mengelola daftar tamu undangan pernikahan.</p>
+          <div class="tags"><span class="tag">JavaScript</span></div><span class="cta">Lihat kode ↗</span>
+        </div>
+      </a>
+      <article class="card" data-cat="backend" style="--h:#5c7cfa">
+        <div class="cover" style="--h:#5c7cfa"><div class="flow"><span>Cari log</span><i></i><span>Hasil tes</span><i></i><span>Dokumen</span></div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Backend</span><span class="status plan">Rencana</span></div>
+          <h3>UIT Generator</h3>
+          <p>Aplikasi untuk mempermudah unit testing saat development: mencari log di Elasticsearch dengan cepat, lalu menyusun dokumen hasil tes secara otomatis.</p>
+          <div class="tags"><span class="tag">Elasticsearch</span><span class="tag">Unit testing</span><span class="tag">Web</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="belajar" style="--h:#00add8">
+        <div class="cover" style="--h:#00add8"><div class="tree">belajar-golang/<br>├ <b>standard-library</b>/<br>├ <b>goroutine</b>/<br>├ <b>restful-api</b>/<br>└ … 20 repo</div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Belajar</span><span class="status ">Belum dipublikasikan</span></div>
+          <h3>Belajar Golang</h3>
+          <p>Monorepo 20 proyek tutorial Go, satu folder per konsep dengan komentar bahasa Indonesia untuk pemula, dari standard library sampai Fiber dan Redis.</p>
+          <div class="tags"><span class="tag">Go</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Fiber</span></div>
+        </div>
+      </article>
+      <article class="card" data-cat="belajar" style="--h:#6db33f">
+        <div class="cover" style="--h:#6db33f"><div class="tree">spring-boot/<br>├ <b>ioc-di</b>/<br>├ <b>logging-slf4j</b>/<br>└ <b>crud-rest-api</b>/</div></div>
+        <div class="body">
+          <div class="kicker"><span class="label">Belajar</span><span class="status ">Belum dipublikasikan</span></div>
+          <h3>Belajar Spring Boot</h3>
+          <p>Tiga proyek Maven untuk pemula: IoC dan dependency injection, logging SLF4J, dan CRUD REST API, dengan penjelasan bahasa Indonesia.</p>
+          <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Maven</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="about" id="tentang">
+    <div class="stack">
+      <span class="label">Tentang saya</span>
+      <h2>Dari layar aplikasi sampai ke server.</h2>
+      <p>Saya pernah mengerjakan aplikasi mobile produksi di Telkom Sigma, lalu banyak bekerja dengan API dan sistem skala perusahaan. Proyek-proyek di halaman ini menunjukkan cara saya membangun aplikasi utuh, dari tampilan sampai backend.</p>
+      <p><a href="https://github.com/aulansah">github.com/aulansah ↗</a></p>
+    </div>
+    <div class="stack" style="gap:12px">
+      <span class="label">Keahlian &amp; pendidikan</span>
+      <ul>
+        <li>Mobile: Kotlin, Java, Flutter</li>
+        <li>Backend: Go, Spring Boot, Node.js</li>
+        <li>API &amp; deployment: REST, SOAP, Docker, Kubernetes, OpenShift</li>
+        <li>Bangkit Academy, jalur Mobile Development</li>
+        <li>Dicoding, jalur Android dan Backend tingkat Expert</li>
+        <li>S1 Teknologi Informasi, Institut Teknologi Telkom Surabaya</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- ========== PROYEK: RESEP MAKANAN INDONESIA ========== -->
+<article data-view="resep-makanan-indonesia" class="proj" hidden>
+  <header class="stack">
+    <div class="top"><a class="back" href="#">← Semua proyek</a><a href="https://github.com/aulansah/Aplikasi-Makanan-Indonesia">Lihat repo ↗</a></div>
+    <span class="label">Mobile · 2021 → 2026</span>
+    <h1>Resep Makanan Indonesia</h1>
+    <p class="lede">Aplikasi untuk memasak 10 makanan khas Indonesia di rumah, lengkap dengan bahan, langkah, dan kalkulator porsi. Mulai sebagai tugas belajar Android tahun 2021, sekarang dibangun ulang dalam lima stack untuk membandingkan cara kerja tiap teknologi.</p>
+    <ul class="chips"><li class="chip">Kotlin + Compose</li><li class="chip">Kotlin + XML</li><li class="chip">Java</li><li class="chip">Flutter</li><li class="chip">React Native</li></ul>
+  </header>
+
+  <section class="stack">
+    <h2>Dari tugas belajar jadi proyek portofolio</h2>
+    <ol class="timeline">
+      <li><span class="yr">2021</span><h3>Tugas belajar Android</h3><p>Satu daftar makanan, satu halaman detail, dan halaman tentang. Kotlin dan XML, data langsung ditulis di kode.</p></li>
+      <li><span class="yr">2026</span><h3>Bisa dibuka lagi</h3><p>JCenter, sumber dependency versi 2021, sudah tutup, jadi build gagal sejak awal. Gradle, Kotlin, dan semua library dinaikkan ke versi terkini.</p></li>
+      <li><span class="yr">2026</span><h3>Desain sendiri</h3><p>Tema bawaan Android Studio diganti dengan desain terakota dan emas yang terasa seperti aplikasi kuliner.</p></li>
+      <li><span class="yr">2026</span><h3>Yang tampak jadi benar-benar jalan</h3><p>Pencarian ternyata hanya teks diam, chip filter tidak bisa diklik, tombol favorit hanya memunculkan toast, dan beberapa foto hilang. Semuanya diperbaiki, lalu Room ditambahkan agar data tidak lagi hidup di kode.</p></li>
+      <li><span class="yr">2026</span><h3>Compose, Hilt, tes, CI</h3><p>Tampilan pindah dari XML ke Jetpack Compose dengan satu Activity. Ditambah Hilt, tes unit untuk ViewModel, R8 untuk build rilis, dan GitHub Actions.</p></li>
+      <li><span class="yr">2026</span><h3>Tujuan yang jelas: memasak</h3><p>Katalog saja tidak memberi alasan untuk dibuka lagi. Sekarang tiap makanan punya bahan, langkah memasak, dan kalkulator porsi untuk 1 sampai 20 porsi.</p></li>
+      <li><span class="yr">2026</span><h3>Lima versi</h3><p>Aplikasi yang sama dibuat ulang dengan Kotlin XML, Java, Flutter, dan React Native. Isi datanya identik, hanya cara membangunnya yang berbeda.</p></li>
+    </ol>
+  </section>
+
+  <section class="stack">
+    <h2>Satu bug yang mengajarkan banyak</h2>
+    <p>Foto makanan tidak muncul, padahal berkasnya ada. Penyebabnya ada di cara foto disimpan.</p>
+    <div class="ba">
+      <div><span class="label tag-bad">Sebelum</span><p>ID gambar disimpan di database sebagai angka. ID itu dibuat Android saat build dan bisa berubah di build berikutnya, jadi angka lama menunjuk ke gambar yang salah atau tidak ada.</p><pre>photo = 2131230843   // angka dari R.drawable</pre></div>
+      <div><span class="label tag-good">Sesudah</span><p>Database menyimpan kunci teks yang tidak pernah berubah. Satu kelas kecil menerjemahkannya ke gambar saat ditampilkan, dan ada tes yang memastikan setiap kunci menghasilkan gambar.</p><pre>photo_key = "rendang"
+PhotoResolver.resolve("rendang")</pre></div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>Lima cara membangun aplikasi yang sama</h2>
+    <p>Fiturnya sama di semua versi. Yang dibandingkan adalah cara UI dibuat, state dikelola, dan data disimpan.</p>
+    <div class="tabs" role="tablist" id="stack-tabs"></div>
+    <div class="panel" role="tabpanel" id="stack-panel" aria-live="polite"></div>
+  </section>
+
+  <section class="stack">
+    <h2>Yang sudah diuji dan yang belum</h2>
+    <p>Daftar ini ditulis apa adanya dan akan diperbarui setelah semua versi dibuild di perangkat.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Bagian</th><th>Status</th><th>Dasarnya</th></tr></thead>
+      <tbody>
+        <tr><td>Data resep 10 makanan</td><td><span class="st ok">Teruji</span></td><td>Dibandingkan dengan skrip: identik di kelima versi.</td></tr>
+        <tr><td>Logika Java (porsi, resep, filter)</td><td><span class="st ok">Teruji</span></td><td>Dikompilasi dan dijalankan.</td></tr>
+        <tr><td>React Native (TypeScript)</td><td><span class="st ok">Teruji</span></td><td>Lolos pemeriksaan tipe strict. 14 tes Jest lolos untuk resep, penyusun SQL, dan store.</td></tr>
+        <tr><td>SQL Flutter dan React Native</td><td><span class="st ok">Teruji</span></td><td>Skema dan semua query dijalankan di SQLite asli.</td></tr>
+        <tr><td>Build Android (Compose, XML, Java)</td><td><span class="st no">Belum</span></td><td>Belum dibuild dengan Gradle dan belum dijalankan di perangkat.</td></tr>
+        <tr><td>Flutter dan layar React Native</td><td><span class="st no">Belum</span></td><td>Belum dijalankan di emulator atau perangkat.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <footer>Foto makanan adalah aset dari aplikasinya. <a href="#">← Kembali ke daftar proyek</a></footer>
+</article>
+</div>
+
+<script>
+const STACKS = [
+  {k:"Kotlin + Compose", intro:"Versi utama. Paling lengkap dan paling dekat dengan proyek Android baru.",
+   ui:"Compose + Material 3. Layar adalah fungsi dari state, jadi tidak ada XML yang harus disinkronkan.",
+   state:"ViewModel + StateFlow. Alurnya satu arah dan state bertahan saat layar diputar.",
+   db:"Room (SQLite). SQL diperiksa saat kompilasi dan hasilnya berupa Flow.",
+   etc:"Hilt untuk dependency injection, Coil untuk gambar, tes dengan Turbine, R8 dan CI."},
+  {k:"Kotlin + XML", intro:"Pembanding langsung untuk Compose. Logika data sama persis, hanya UI yang berbeda.",
+   ui:"XML + ViewBinding + RecyclerView dengan ListAdapter dan DiffUtil.",
+   state:"ViewModel + StateFlow, dikumpulkan dengan repeatOnLifecycle.",
+   db:"Room (SQLite), sama dengan versi Compose.",
+   etc:"Tanpa Hilt: satu repository dibuat di Application dan ViewModel mengambilnya lewat factory, karena aplikasinya hanya punya satu repository."},
+  {k:"Java", intro:"Banyak aplikasi Android perusahaan masih ditulis dengan Java. Compose tidak bisa dipakai di sini karena butuh compiler plugin Kotlin.",
+   ui:"XML + ViewBinding + RecyclerView.",
+   state:"ViewModel + LiveData. MediatorLiveData menggabungkan daftar, kata kunci, dan kategori.",
+   db:"Room (SQLite) dengan annotation processor.",
+   etc:"Penulisan ke database lewat satu thread, jadi data awal selalu selesai diisi sebelum favorit diubah."},
+  {k:"Flutter", intro:"Satu basis kode untuk Android dan iOS.",
+   ui:"Widget Flutter + Material 3.",
+   state:"Riverpod. Daftar makanan otomatis diambil ulang saat kata kunci atau kategori berubah.",
+   db:"SQLite lewat sqflite. Pencarian dan filter dikerjakan di SQL.",
+   etc:"Repository berupa antarmuka, jadi tes widget memakai versi di memori dan tes SQL memakai SQLite asli. Tidak memakai drift karena butuh pembuatan kode lewat build_runner."},
+  {k:"React Native", intro:"Cocok kalau tim sudah kuat di JavaScript dan React.",
+   ui:"React Native + Expo, TypeScript mode strict, React Navigation.",
+   state:"zustand. Satu store kecil, komponen hanya render ulang saat bagian yang dibacanya berubah.",
+   db:"SQLite lewat expo-sqlite. SQL disusun dengan parameter, bukan sambungan string.",
+   etc:"Store dibuat lewat fungsi yang menerima repository, jadi logikanya dites di Node tanpa emulator."}
+];
+const tabs = document.getElementById("stack-tabs"), panel = document.getElementById("stack-panel");
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+function show(i){
+  [...tabs.children].forEach((b,j)=>b.setAttribute("aria-selected", j===i));
+  const s = STACKS[i];
+  panel.innerHTML = `<h3>${esc(s.k)}</h3><p style="color:var(--muted)">${esc(s.intro)}</p>
+    <dl><dt>UI</dt><dd>${esc(s.ui)}</dd><dt>State</dt><dd>${esc(s.state)}</dd><dt>Database</dt><dd>${esc(s.db)}</dd><dt>Lainnya</dt><dd>${esc(s.etc)}</dd></dl>`;
+}
+STACKS.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.role="tab";b.id="tab-"+i;b.textContent=s.k;b.onclick=()=>show(i);tabs.appendChild(b)});
+show(0);
+
+function route(){
+  const id = location.hash.slice(1) || "home";
+  const views = document.querySelectorAll("[data-view]");
+  const target = [...views].some(v=>v.dataset.view===id) ? id : "home";
+  views.forEach(v=>v.hidden = v.dataset.view!==target);
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange", route); route();
+document.querySelectorAll("[data-jump]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();document.getElementById(a.dataset.jump).scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}));
+const fbtn=document.querySelectorAll("[data-f]");
+fbtn.forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.f;fbtn.forEach(x=>x.setAttribute("aria-pressed",x===b));
+  document.querySelectorAll(".grid .card").forEach(c=>c.hidden=!(f==="all"||c.dataset.cat===f));
+  document.querySelector(".feature").style.gridColumn=(f==="all")?"":"auto";}));
+</script>
+
+</body>
+</html>
